@@ -47,8 +47,7 @@ app.run(debug=True)
 ```
 
 
-![obrazek](https://user-images.githubusercontent.com/29150831/135485636-e8f9a251-7541-4476-a1c8-b37a919a4baa.png)
-
+![obrazek](https://user-images.githubusercontent.com/29150831/135487165-df9826da-9ed6-484d-956a-1291fc833e23.png)
 
 
 ## Contributing
