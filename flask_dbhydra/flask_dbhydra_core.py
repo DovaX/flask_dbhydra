@@ -7,31 +7,6 @@ from flask_jwt_extended import JWTManager
 from flask_jwt_extended import (create_access_token)
 import dbhydra.dbhydra_core as dm
 
-
-"""
-Template
-app = Flask(__name__)
-db1=dm.Mysqldb()
-db1.close_connection()
-
-app.config['MYSQL_USER'] = db1.DB_USERNAME
-app.config['MYSQL_PASSWORD'] = db1.DB_PASSWORD
-app.config['MYSQL_DB'] = db1.DB_DATABASE
-app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
-app.config['JWT_SECRET_KEY'] = 'secret'
-
-mysql = MySQL(app)
-CORS(app)
-
-TABLE_NAME="users"
-
-item_name="item"
-column1_name="column1"
-column2_name="column2"
-
-doorm_flask_dict={'users':'read','items':'read'}
-"""
-
 #CRUD API - CREATE, READ, UPDATE, DELETE
 
 def rename_function(new_name):
@@ -40,10 +15,10 @@ def rename_function(new_name):
         return f
     return decorator
 
-def initialize_api(app,doorm_flask_dict,column_name_list,mysql,column1_name=""):   
+def initialize_api(app,flask_dbhydra_dict,column_name_list,mysql,column1_name=""):   
     bcrypt = Bcrypt(app)
     jwt = JWTManager(app)
-    for k,v in doorm_flask_dict.items():
+    for k,v in flask_dbhydra_dict.items():
         if 'read' in v:
             @app.route('/api/'+k, methods=['GET'])
             @rename_function('read_all_'+k)
