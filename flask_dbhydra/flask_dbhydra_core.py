@@ -18,6 +18,7 @@ def rename_function(new_name):
 def initialize_api(app,flask_dbhydra_dict,column_name_list,mysql,column1_name=""):   
     bcrypt = Bcrypt(app)
     jwt = JWTManager(app)
+    CORS(app)
     for k,v in flask_dbhydra_dict.items():
         if 'read' in v:
             @app.route('/api/'+k, methods=['GET'])
