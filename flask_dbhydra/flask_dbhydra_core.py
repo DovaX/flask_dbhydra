@@ -18,7 +18,7 @@ def rename_function(new_name):
 def initialize_api(app,flask_dbhydra_dict,column_name_list,mysql,column1_name=""):   
     bcrypt = Bcrypt(app)
     jwt = JWTManager(app)
-    CORS(app)
+    CORS(app, origins="*")
     for k,v in flask_dbhydra_dict.items():
         if 'read' in v:
             @app.route('/api/'+k, methods=['GET'])
@@ -118,7 +118,13 @@ def initialize_api(app,flask_dbhydra_dict,column_name_list,mysql,column1_name=""
                 print("RV",rv)
                 if bcrypt.check_password_hash(rv['password'], password):
                     access_token = create_access_token(identity = {'email': rv['email'],'id':rv['id']})
-                    result = access_token
+                    cur.execute("UPDATE "+k+" SET jwt_token='"+access_token+"' WHERE email = '" + str(email) + "'")
+                    mysql.connection.commit()
+                    
+                    result = jsonify({"jwt_token":access_token})
+                    print("jwt_token",result)
+                    
+                    
                 else:
                     result = jsonify({"error":"Invalid username and password"})
                 

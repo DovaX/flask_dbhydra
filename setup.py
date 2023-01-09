@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
     
 setuptools.setup(
     name='flask_dbhydra',
-    version='0.1.0',
+    version='0.1.6',
     author='DovaX',
     author_email='dovax.ai@gmail.com',
     description='Autogenerate Flask API for dbhydra ORM DB structure',
