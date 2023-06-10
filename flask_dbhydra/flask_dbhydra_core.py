@@ -85,7 +85,7 @@ def initialize_api(app,flask_dbhydra_dict,column_name_list,mysql,column1_name=""
                 cur = mysql.connection.cursor()
                 email = request.get_json(force=True)['email']
                 #req_pass=request.get_json(force=True)['password']
-                password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
+                password = bcrypt.generate_password_hash(request.get_json(force=True)['password']).decode('utf-8')
                 creation_utc_time = datetime.utcnow()
             	
                 cur.execute("INSERT INTO "+k+" (email, password, creation_utc_time) VALUES ('" + 
@@ -108,7 +108,6 @@ def initialize_api(app,flask_dbhydra_dict,column_name_list,mysql,column1_name=""
             @rename_function('login_'+item)
             def login(k=k): #k=k because of late binding - otherwise, it would assign all endpoints with the same k
                 cur = mysql.connection.cursor()
-                print("TEST",request.get_json())
                 email = request.get_json(force=True)['email']
                 password = request.get_json(force=True)['password']
                 result = ""
